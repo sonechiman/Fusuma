@@ -57,9 +57,10 @@ final class FSVideoCameraView: UIView {
         for device in AVCaptureDevice.devices() {
             
             if let device = device as? AVCaptureDevice,
-                device.position == AVCaptureDevicePosition.back {
+                device.position == AVCaptureDevicePosition.front {
                 
                 self.device = device
+                flashButton.isHidden = !device.hasFlash
             }
         }
         
@@ -191,6 +192,20 @@ final class FSVideoCameraView: UIView {
                     device.position == position {
                     
                     videoInput = try AVCaptureDeviceInput(device: device)
+                    self.device = device
+                    if !device.hasFlash {
+                        flashButton.isHidden = true
+                    } else {
+                        flashButton.isHidden = false
+                        switch device.flashMode {
+                        case .off:
+                            flashButton.setImage(flashOffImage?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+                        case .on:
+                            flashButton.setImage(flashOnImage?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+                        default:
+                            break
+                        }
+                    }
                     session.addInput(videoInput)
                 }
             }
