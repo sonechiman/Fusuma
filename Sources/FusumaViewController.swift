@@ -37,6 +37,7 @@ public protocol FusumaDelegate: class {
     func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode)
     func fusumaVideoCompleted(withFileURL fileURL: URL)
     func fusumaCameraRollUnauthorized()
+    func changeMode(source: FusumaMode, hasGalleryPermission: Bool)
 }
 
 public extension FusumaDelegate {
@@ -101,7 +102,7 @@ public class FusumaViewController: UIViewController {
     public var cropHeightRatio: CGFloat = 1
     public var allowMultipleSelection: Bool = false
 
-    fileprivate var mode: FusumaMode = .none
+    public var mode: FusumaMode = .none
     public var defaultMode: FusumaMode = .library
     fileprivate var willFilter = true
 
@@ -109,13 +110,9 @@ public class FusumaViewController: UIViewController {
     @IBOutlet weak var cameraShotContainer: UIView!
     @IBOutlet weak var videoShotContainer: UIView!
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var libraryButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var videoButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
 
     @IBOutlet var libraryFirstConstraints: [NSLayoutConstraint]!
     @IBOutlet var cameraFirstConstraints: [NSLayoutConstraint]!
@@ -124,7 +121,7 @@ public class FusumaViewController: UIViewController {
     lazy var cameraView = FSCameraView.instance()
     lazy var videoView  = FSVideoCameraView.instance()
 
-    fileprivate var hasGalleryPermission: Bool {
+    public var hasGalleryPermission: Bool {
         
         return PHPhotoLibrary.authorizationStatus() == .authorized
     }
@@ -148,9 +145,6 @@ public class FusumaViewController: UIViewController {
         albumView.delegate  = self
         videoView.delegate  = self
 
-        menuView.backgroundColor = fusumaBackgroundColor
-        menuView.addBottomBorder(UIColor.black, width: 1.0)
-
         albumView.allowMultipleSelection = allowMultipleSelection
         
         let bundle = Bundle(for: self.classForCoder)
@@ -162,7 +156,6 @@ public class FusumaViewController: UIViewController {
         let videoImage = fusumaVideoImage != nil ? fusumaVideoImage : UIImage(named: "ic_videocam", in: bundle, compatibleWith: nil)
 
         
-        let checkImage = fusumaCheckImage != nil ? fusumaCheckImage : UIImage(named: "ic_check", in: bundle, compatibleWith: nil)
         let closeImage = fusumaCloseImage != nil ? fusumaCloseImage : UIImage(named: "ic_close", in: bundle, compatibleWith: nil)
         
         if fusumaTintIcons {
@@ -171,7 +164,6 @@ public class FusumaViewController: UIViewController {
             let cameraImage = cameraImage?.withRenderingMode(.alwaysTemplate)
             let closeImage  = closeImage?.withRenderingMode(.alwaysTemplate)
             let videoImage  = closeImage?.withRenderingMode(.alwaysTemplate)
-            let checkImage  = checkImage?.withRenderingMode(.alwaysTemplate)
 
             libraryButton.setImage(albumImage, for: UIControlState())
             libraryButton.setImage(albumImage, for: .highlighted)
@@ -185,10 +177,6 @@ public class FusumaViewController: UIViewController {
             cameraButton.tintColor = fusumaTintColor
             cameraButton.adjustsImageWhenHighlighted = false
             
-            closeButton.setImage(closeImage, for: UIControlState())
-            closeButton.setImage(closeImage, for: .highlighted)
-            closeButton.setImage(closeImage, for: .selected)
-            closeButton.tintColor = fusumaBaseTintColor
             
             videoButton.setImage(videoImage, for: UIControlState())
             videoButton.setImage(videoImage, for: .highlighted)
@@ -196,10 +184,6 @@ public class FusumaViewController: UIViewController {
             videoButton.tintColor = fusumaTintColor
             videoButton.adjustsImageWhenHighlighted = false
             
-            doneButton.setImage(checkImage, for: UIControlState())
-            doneButton.setImage(checkImage, for: .highlighted)
-            doneButton.setImage(checkImage, for: .selected)
-            doneButton.tintColor = fusumaBaseTintColor
             
         } else {
             
@@ -218,8 +202,6 @@ public class FusumaViewController: UIViewController {
             videoButton.setImage(videoImage, for: .selected)
             videoButton.tintColor = nil
             
-            closeButton.setImage(closeImage, for: UIControlState())
-            doneButton.setImage(checkImage, for: UIControlState())
         }
         
         cameraButton.clipsToBounds  = true
@@ -230,8 +212,6 @@ public class FusumaViewController: UIViewController {
         cameraShotContainer.addSubview(cameraView)
         videoShotContainer.addSubview(videoView)
         
-        titleLabel.textColor = fusumaBaseTintColor
-        titleLabel.font      = fusumaTitleFont
         
         if !hasVideo {
             
@@ -535,20 +515,17 @@ private extension FusumaViewController {
             
         case .library:
             
-            titleLabel.text = NSLocalizedString(fusumaCameraRollTitle, comment: fusumaCameraRollTitle)
             highlightButton(libraryButton)
             self.view.bringSubview(toFront: photoLibraryViewerContainer)
         
         case .camera:
 
-            titleLabel.text = NSLocalizedString(fusumaCameraTitle, comment: fusumaCameraTitle)
             highlightButton(cameraButton)
             self.view.bringSubview(toFront: cameraShotContainer)
             cameraView.startCamera()
             
         case .video:
             
-            titleLabel.text = fusumaVideoTitle
             highlightButton(videoButton)
             self.view.bringSubview(toFront: videoShotContainer)
             videoView.startCamera()
@@ -558,29 +535,10 @@ private extension FusumaViewController {
             break
         }
         
-        doneButton.isHidden = !hasGalleryPermission
-        self.view.bringSubview(toFront: menuView)
     }
     
     func updateDoneButtonVisibility() {
-
-        // don't show the done button without gallery permission
-        if !hasGalleryPermission {
-            
-            self.doneButton.isHidden = true
-            return
-        }
-
-        switch self.mode {
-            
-        case .library:
-            
-            self.doneButton.isHidden = false
-            
-        default:
-            
-            self.doneButton.isHidden = true
-        }
+        self.delegate?.changeMode(source: self.mode, hasGalleryPermission: hasGalleryPermission)
     }
     
     func dishighlightButtons() {
