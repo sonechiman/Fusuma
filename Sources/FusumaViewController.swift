@@ -103,7 +103,7 @@ public class FusumaViewController: UIViewController {
     public var allowMultipleSelection: Bool = false
 
     public var mode: FusumaMode = .none
-    public var defaultMode: FusumaMode = .library
+    public var defaultMode: FusumaMode = .camera
     fileprivate var willFilter = true
 
     @IBOutlet weak var photoLibraryViewerContainer: UIView!
