@@ -318,7 +318,7 @@ public class FusumaViewController: UIViewController {
         allowMultipleSelection ? fusumaDidFinishInMultipleMode() : fusumaDidFinishInSingleMode()
     }
     
-    private func fusumaDidFinishInSingleMode() {
+    public func fusumaDidFinishInSingleMode() {
         
         guard let view = albumView.imageCropView else { return }
         
