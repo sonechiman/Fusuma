@@ -49,7 +49,7 @@ public extension FusumaDelegate {
 }
 
 public var fusumaBaseTintColor   = UIColor.hex("#FFFFFF", alpha: 1.0)
-public var fusumaTintColor       = UIColor.hex("#F38181", alpha: 1.0)
+public var fusumaTintColor       = UIColor.hex("#2C97DE", alpha: 1.0)
 public var fusumaBackgroundColor = UIColor.hex("#3B3D45", alpha: 1.0)
 
 public var fusumaAlbumImage: UIImage?
