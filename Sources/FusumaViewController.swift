@@ -274,7 +274,11 @@ public class FusumaViewController: UIViewController {
             videoView.initialize()
         }
         
-        changeMode(defaultMode)
+        if self.mode != .none {
+            changeMode(self.mode)
+        } else {
+            changeMode(defaultMode)
+        }
     }
     
     public override func viewWillDisappear(_ animated: Bool) {
@@ -488,7 +492,12 @@ private extension FusumaViewController {
     
     func changeMode(_ mode: FusumaMode) {
 
-        if self.mode == mode { return }
+        if self.mode == mode {
+            if self.mode == .camera {
+                cameraView.startCamera()
+            }
+            return
+        }
         
         //operate this switch before changing mode to stop cameras
         switch self.mode {
