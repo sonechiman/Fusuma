@@ -74,20 +74,13 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="sGm-NU-u2R"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face_border" translatesAutoresizingMaskIntoConstraints="NO" id="9Oi-9L-O4J">
-                    <rect key="frame" x="0.0" y="50" width="400" height="450"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="oUi-qP-Neb" firstAttribute="top" secondItem="9Oi-9L-O4J" secondAttribute="bottom" id="76E-mr-Tjc"/>
                 <constraint firstAttribute="bottom" secondItem="oUi-qP-Neb" secondAttribute="bottom" id="7zn-vY-NCd"/>
-                <constraint firstItem="9Oi-9L-O4J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="Ez1-dE-lLV"/>
                 <constraint firstAttribute="trailing" secondItem="oUi-qP-Neb" secondAttribute="trailing" id="HM7-dt-RPz"/>
                 <constraint firstItem="oUi-qP-Neb" firstAttribute="top" secondItem="SZ8-Sp-jjd" secondAttribute="bottom" id="KEj-9P-kyb"/>
                 <constraint firstItem="oUi-qP-Neb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Lpo-QC-qmm"/>
-                <constraint firstItem="9Oi-9L-O4J" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Nh5-8z-e7H"/>
-                <constraint firstAttribute="trailing" secondItem="9Oi-9L-O4J" secondAttribute="trailing" id="UeI-oF-1Zf"/>
                 <constraint firstItem="SZ8-Sp-jjd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="XnG-nk-Wcr"/>
                 <constraint firstAttribute="trailing" secondItem="SZ8-Sp-jjd" secondAttribute="trailing" id="bms-F5-8H5"/>
                 <constraint firstItem="SZ8-Sp-jjd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="x7t-wb-WiH"/>
@@ -105,7 +98,6 @@
         </view>
     </objects>
     <resources>
-        <image name="face_border" width="500" height="500"/>
         <image name="ic_flash_off" width="48" height="48"/>
         <image name="ic_loop" width="48" height="48"/>
         <image name="shutter_button" width="40" height="40"/>
