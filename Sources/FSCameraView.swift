@@ -259,7 +259,10 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
                 
                 DispatchQueue.main.async(execute: { () -> Void in
                     
-                    let image = fusumaCropImage ? UIImage(cgImage: imageRef, scale: sw/iw, orientation: image.imageOrientation) : image
+                    var image = fusumaCropImage ? UIImage(cgImage: imageRef, scale: sw/iw, orientation: image.imageOrientation) : image
+                    if self.device?.position == .front {
+                        image = fusumaCropImage ? UIImage(cgImage: imageRef, scale: sw/iw, orientation: .leftMirrored) : image
+                    }
                     
                     delegate.cameraShotFinished(image)
                     
