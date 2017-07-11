@@ -38,6 +38,7 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
     fileprivate var motionManager: CMMotionManager?
     fileprivate var currentDeviceOrientation: UIDeviceOrientation?
     
+    
     static func instance() -> FSCameraView {
         
         return UINib(nibName: "FSCameraView", bundle: Bundle(for: self.classForCoder())).instantiate(withOwner: self, options: nil)[0] as! FSCameraView
@@ -129,7 +130,7 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
     }
     
     func willEnterForegroundNotification(_ notification: Notification) {
-        
+        shotButton.isEnabled = true
         startCamera()
     }
     
@@ -181,6 +182,7 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
     }
 
     @IBAction func shotButtonPressed(_ sender: UIButton) {
+        shotButton.isEnabled = false
         
         guard let imageOutput = imageOutput else {
             
@@ -265,6 +267,7 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
                     }
                     
                     delegate.cameraShotFinished(image)
+                    self.shotButton.isEnabled = true
                     
                     if fusumaSavesImage {
                         
