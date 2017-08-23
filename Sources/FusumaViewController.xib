@@ -11,9 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FusumaViewController" customModule="Fusuma" customModuleProvider="target">
             <connections>
-                <outlet property="cameraButton" destination="cph-QM-jcJ" id="ncQ-0M-aJd"/>
+                <outlet property="cameraButton" destination="sCN-QB-mCu" id="iM5-ao-zv6"/>
                 <outlet property="cameraShotContainer" destination="CFH-FU-LPW" id="gvI-wh-cln"/>
-                <outlet property="libraryButton" destination="sCN-QB-mCu" id="LVG-6D-1xf"/>
+                <outlet property="libraryButton" destination="cph-QM-jcJ" id="gTP-MC-JDR"/>
                 <outlet property="photoLibraryViewerContainer" destination="1Pk-29-mUG" id="buU-Cs-7qz"/>
                 <outlet property="videoButton" destination="8ew-Zi-63G" id="PFn-Tm-KwS"/>
                 <outlet property="videoShotContainer" destination="RIt-Tt-mDz" id="vOH-eo-bHH"/>
@@ -43,7 +43,7 @@
                         <constraint firstAttribute="height" constant="45" id="ef6-hG-yx4"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
-                    <state key="normal" image="ic_photo_camera"/>
+                    <state key="normal" image="ic_insert_photo"/>
                     <state key="selected" image="ic_insert_photo"/>
                     <state key="highlighted" image="ic_insert_photo"/>
                     <connections>
@@ -69,7 +69,7 @@
                         <constraint firstAttribute="height" constant="45" id="7VV-4q-BRr"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="2" minY="3" maxX="2" maxY="2"/>
-                    <state key="normal" image="ic_insert_photo"/>
+                    <state key="normal" image="ic_photo_camera"/>
                     <state key="selected" image="ic_photo_camera"/>
                     <state key="highlighted" image="ic_photo_camera"/>
                     <connections>
