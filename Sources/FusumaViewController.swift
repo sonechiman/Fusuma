@@ -221,7 +221,7 @@ public class FusumaViewController: UIViewController {
                 item:       self.view,
                 attribute:  .trailing,
                 relatedBy:  .equal,
-                toItem:     libraryButton,
+                toItem:     cameraButton,
                 attribute:  .trailing,
                 multiplier: 1.0,
                 constant:   0

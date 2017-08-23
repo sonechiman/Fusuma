@@ -47,7 +47,7 @@
                     <state key="selected" image="ic_insert_photo"/>
                     <state key="highlighted" image="ic_insert_photo"/>
                     <connections>
-                        <action selector="photoButtonPressed:" destination="-1" eventType="touchUpInside" id="oNj-gF-1jQ"/>
+                        <action selector="libraryButtonPressed:" destination="-1" eventType="touchUpInside" id="g3w-iS-znw"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ew-Zi-63G">
@@ -73,7 +73,7 @@
                     <state key="selected" image="ic_photo_camera"/>
                     <state key="highlighted" image="ic_photo_camera"/>
                     <connections>
-                        <action selector="libraryButtonPressed:" destination="-1" eventType="touchUpInside" id="WJx-XN-WYm"/>
+                        <action selector="photoButtonPressed:" destination="-1" eventType="touchUpInside" id="4A8-Cd-nSp"/>
                     </connections>
                 </button>
             </subviews>
